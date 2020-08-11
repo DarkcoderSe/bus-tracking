@@ -64,6 +64,7 @@
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
           </form>
+          {{-- logout button  --}}
       </li>
  
     </ul>
@@ -105,6 +106,8 @@
               </p>
             </a>
           </li>
+
+          {{-- drivers list page  --}}
           <li class="nav-item">
             <a href="{{ URL::to('/admin/driver') }}" class="nav-link">
          
@@ -113,6 +116,8 @@
                 </p>
             </a>
           </li>
+
+          {{-- users list page  --}}
           <li class="nav-item">
             <a href="{{ URL::to('/admin/user') }}" class="nav-link">
          
@@ -121,6 +126,8 @@
                 </p>
             </a>
           </li>
+
+          {{-- vehicles list page  --}}
           <li class="nav-item">
             <a href="{{ URL::to('/admin/vehicle') }}" class="nav-link">
          

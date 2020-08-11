@@ -1,61 +1,72 @@
 @extends('layouts.master')
 
+{{-- This page shows the list of vehicles  --}}
+{{-- tihs page's parent is layout > master  --}}
+{{-- we use @ for blade syntax and $ for php  --}}
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-11">
             <div class="card">
                 <div class="card-header p-1">
                     <div class="row">
+                        {{-- URL::to is built in laravel function redirect to specific route  --}}
                         <div class="col-md-4">
-                            <a href="{{ URL::to('/driver/create') }} " class="btn btn-success">
-                                Add new Driver
+                            <a href="{{ URL::to('admin/vehicle/create') }} " class="btn btn-success">
+                                Add new vehicle
                             </a>
+                            {{-- add new vehicle button  --}}
                         </div>
                         <div class="col-md-4 text-center">
                             <h4>
-                                Drivers
+                                Vehicles
                             </h4>
                         </div>
                         <div class="col-md-4">
                             <a href="{{ URL::to('/home') }} " class="btn btn-primary" style="float: right;">
                                 Back
                             </a>
+                            {{-- back button  --}}
                         </div>
+
                     </div>
                 </div>
                 <div class="card-body p-0">
                     <table class="table table-striped m-0">
                         <thead>
                             <tr>
-                                <th>Pciture</th>
-                                <th>Name</th>
-                                <th>Phone No.</th>
-                                <th>Vehicle No.</th>
+                                {{-- vehicle info table heading  --}}
+                                <th>Registration No.</th>
+                                <th>Seats</th>
                                 <th>Route</th>
+                                <th>Status</th>
+                                <th>Driver</th>
                                 <th>
                                     Action
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($drivers as $driver)
+                            {{-- running loop to show vehicle here  --}}
+                            @foreach($vehicles as $vehicle)
                             <tr>
                                 <td>
-                                    <img src="{{ URL::to('uploads/profilePictures', $driver->picture ? $driver->picture : '/404.png' ) }} " alt="loading.." style="width: 40px;">
-                                </td>
-                                <td>
-                                    <a href="{{ URL::to('/driver/edit', $driver->id) }} ">
-                                        {{ $driver->name }}
+                                    <a href="{{ URL::to('/vehicle/edit', $vehicle->id) }} ">
+                                    {{ $vehicle->registration_no }}
                                     </a>
+                                    {{-- vehicle edit page button  --}}
                                 </td>
-                                <td>{{ $driver->contact_no }} </td>
-                                <td>{{ $driver->Vehicle->name }} </td>
-                                <td>{{ $driver->Vehicle->route }} </td>
                                 <td>
-                                    <a href="{{ URL::to('/driver/delete', $driver->id) }} " class="btn btn-danger btn-sm">
+                                    {{ $vehicle->seats }}
+                                </td>
+                                <td>{{ $vehicle->route }} </td>
+                                <td>{{ $vehicle->status == 1 ? 'Active' : 'Not Active' }} </td>
+                                <td>{{ $vehicle->Driver->name }} </td>
+                                <td>
+                                    <a href="{{ URL::to('/vehicle/delete', $vehicle->id) }} " class="btn btn-danger btn-sm">
                                         Delete
                                     </a>
+                                    {{-- vehicle delete button  --}}
                                 </td>
                             </tr>
                             @endforeach

@@ -23,7 +23,7 @@ class CreateVehiclesTable extends Migration
             $table->string('latitude')->nullable(); // location of vehicle will be stored here. 
             $table->string('longitude')->nullable();
             $table->boolean('status')->default(0); // status of vehicle is it in running form etc. value can be 0 or 1;
-            $table->string('route')->nullable(); // vehicle route will be stored.
+            $table->text('route')->nullable(); // vehicle route will be stored.
             $table->timestamps();
         });
     }

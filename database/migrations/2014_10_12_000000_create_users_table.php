@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->bigInteger('contact_no')->default(0); // contact no of user.
             $table->string('picture')->nullable(); // student, driver, faculty profile pic.
             $table->text('address')->nullable(); // address of user will be stored here. 
+            $table->string('reg_no')->nullable(); // registration of student.
             $table->rememberToken();
             $table->timestamps();
         });

@@ -13,15 +13,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// showing home page with view function. this method is called closure routing.
 Route::get('/', function () {
     return view('welcome');
 });
 
+// authentication routes grouped in vendor folder.
+// this is package routing
 Auth::routes();
 
+
+// showing home page with controller 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+// creating admin routes with security 
+// middleware used for security only admin can access this group of routes.
 Route::prefix('admin')->namespace('Admin')->middleware('role:admin')->group(function(){
+
+    // user section 
+    // see naming conventation below i.e: create for creating a user.
     Route::prefix('user')->group(function(){
         Route::get('/', 'UserController@index');
         Route::get('create', 'UserController@create');
@@ -30,5 +41,17 @@ Route::prefix('admin')->namespace('Admin')->middleware('role:admin')->group(func
 
         Route::post('submit', 'UserController@submit');
         Route::post('update', 'UserController@update');
+    });
+
+    // vehicle section 
+    // see naming conventation below i.e: create for creating a vehicle.
+    Route::prefix('vehicle')->group(function(){
+        Route::get('/', 'VehicleController@index');
+        Route::get('create', 'VehicleController@create');
+        Route::get('edit/{id}', 'VehicleController@edit');
+        Route::get('delete/{id}', 'VehicleController@delete');
+
+        Route::post('submit', 'VehicleController@submit');
+        Route::post('update', 'VehicleController@update');
     });
 });
