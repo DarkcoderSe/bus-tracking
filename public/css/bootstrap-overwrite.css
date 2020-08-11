@@ -1,0 +1,12 @@
+.form-control{
+    border: none;
+    border-left: 3px solid #888;
+    border-radius: 0;
+}
+.form-control:hover{
+    border-left: 3px solid #000;
+}
+
+.nav-icon{
+    margin-bottom: -5px;
+}
