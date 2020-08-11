@@ -121,6 +121,14 @@
                 </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ URL::to('/admin/vehicle') }}" class="nav-link">
+         
+                <p>
+                  Vehicle
+                </p>
+            </a>
+          </li>
           
         </ul>
       </nav>

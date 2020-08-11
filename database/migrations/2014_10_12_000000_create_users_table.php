@@ -13,12 +13,17 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        // all types of users can be stored here. ie: driver, faculty, student, admins etc...
+        // because we are using role based system for that. please see the laratrust table for roles and permissions.
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->bigInteger('contact_no')->default(0); // contact no of user.
+            $table->string('picture')->nullable(); // student, driver, faculty profile pic.
+            $table->text('address')->nullable(); // address of user will be stored here. 
             $table->rememberToken();
             $table->timestamps();
         });

@@ -31,7 +31,7 @@
                                 <th>Pciture</th>
                                 <th>Name</th>
                                 <th>Phone No.</th>
-                                <th>Bus No.</th>
+                                <th>Vehicle No.</th>
                                 <th>
                                     Action
                                 </th>
@@ -49,7 +49,7 @@
                                     </a>
                                 </td>
                                 <td>{{ $driver->phone_no }} </td>
-                                <td>{{ $driver->Bus->name }} </td>
+                                <td>{{ $driver->Vehicle->name }} </td>
                                 <td>
                                     <a href="{{ URL::to('/driver/delete', $driver->id) }} " class="btn btn-danger btn-sm">
                                         Delete
