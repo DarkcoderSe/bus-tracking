@@ -20,3 +20,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('admin')->namespace('Admin')->middleware('role:admin')->group(function(){
+    Route::prefix('user')->group(function(){
+        Route::get('/', 'UserController@index');
+        Route::get('create', 'UserController@create');
+        Route::get('edit/{id}', 'UserController@edit');
+        Route::get('delete/{id}', 'UserController@delete');
+
+        Route::post('submit', 'UserController@submit');
+        Route::post('update', 'UserController@update');
+    });
+});

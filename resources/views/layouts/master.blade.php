@@ -109,6 +109,14 @@
             <a href="{{ URL::to('/admin/driver') }}" class="nav-link">
          
                 <p>
+                  Drivers
+                </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ URL::to('/admin/user') }}" class="nav-link">
+         
+                <p>
                   Users
                 </p>
             </a>
@@ -148,16 +156,11 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button)
-  $(document).ready(function(){
-    <?php 
-      if(session('status')){
-        echo "toastr.".session('status')."('" . session('message') . "')";
-      }
-    ?>
-  });
+  
 </script>
 <script src="{{URL::to('javascripts/adminlte.js')}}"></script>
 <script src="{{URL::to('javascripts/demo.js')}}"></script>
 @stack('script')
+{!! Toastr::message() !!}
 </body>
 </html>
