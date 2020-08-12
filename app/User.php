@@ -48,4 +48,9 @@ class User extends Authenticatable
     public function Vehicle(){
         return $this->hasOne(Vehicle::class, 'driver_id');
     }
+
+    // creating one to one relation with vehicle and students, faculty.
+    public function UserVehicle(){
+        return $this->hasOne(UserVehicle::class);
+    }
 }

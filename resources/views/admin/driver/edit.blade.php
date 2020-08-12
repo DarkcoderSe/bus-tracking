@@ -163,7 +163,7 @@
                                 {{-- checking validation errors for above field here  --}}
                                 @if($errors->any())
                                 <span class="small text-danger">
-                                    {{ $errors->first('pay') }}
+                                    {{ $errors->first('address') }}
                                 </span>
                                 @endif
                             </div>
