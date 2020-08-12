@@ -121,7 +121,7 @@
                             <div class="form-check ml-2 mb-2">
                               <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="status" {{ $vehicle->status == 1 ? 'checked' : '' }}>
-                                Vehicle Status
+                                Active
                               </label>
                             </div>
                         </div>

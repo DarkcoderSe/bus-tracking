@@ -37,73 +37,141 @@
                             {{-- registration number of driver html field  --}}
                             <div class="form-group col-md-4">
                                 <label>Name</label>
-                                <input type="text" name="registration_no" class="form-control" required>
+                                <input type="text" name="name" class="form-control" required>
 
                                 {{-- checking validation errors for above field here  --}}
                                 @if($errors->any())
                                 <span class="small text-danger">
-                                    {{ $errors->first('registration_no') }}
+                                    {{ $errors->first('name') }}
                                 </span>
                                 @endif
                             </div>
 
-                            {{-- seats of driver html field  --}}
+                            {{-- contact_no of driver html field  --}}
                             <div class="form-group col-md-4">
-                                <label>No. of Seats</label>
-                                <input type="text" name="seats" class="form-control" required>
+                                <label>Contact No.</label>
+                                <input type="text" name="contact_no" class="form-control" required>
 
                                 {{-- checking validation errors for above field here  --}}
                                 @if($errors->any())
                                 <span class="small text-danger">
-                                    {{ $errors->first('seats') }}
+                                    {{ $errors->first('contact_no') }}
                                 </span>
                                 @endif
                             </div>
 
-                            {{-- driver of driver html field  --}}
+                            {{-- vehicle of driver html field  --}}
                             <div class="form-group col-md-4">
-                                <label>Driver</label>
-                                <select name="driver_id" class="custom-select">
-                                    {{-- showing list of all drivers in select field  --}}
-                                    @foreach($drivers as $driver)
-                                    <option value="{{ $driver->id }} "> {{ $driver->name }}</option>
+                                <label>Vehicle</label>
+                                <select name="vehicle_id"  class="custom-select">
+                                    @foreach($vehicles as $vehicle)
+                                    <option value="{{ $vehicle->id }}">
+                                        {{ $vehicle->registration_no }}
+                                    </option>
                                     @endforeach
                                 </select>
-
                                 {{-- checking validation errors for above field here  --}}
                                 @if($errors->any())
                                 <span class="small text-danger">
-                                    {{ $errors->first('driver_id') }}
+                                    {{ $errors->first('vehicle_id') }}
+                                </span>
+                                @endif
+
+                                @if($vehicles->count() <= 0)
+                                <span class="small text-secondary">
+                                    Please add some <a href="{{ URL::to('/admin/vehicle') }} ">vehicles</a> first.
                                 </span>
                                 @endif
                             </div>
+
                         </div>
 
-                        {{-- second row  --}}
+                        {{-- 2nd row  --}}
                         <div class="form-row">
 
-                            {{-- route of driver html field  --}}
+                            {{-- email of driver html field  --}}
                             <div class="form-group col-md-6">
-                                <label>Route</label>
-                                <textarea name="route" id="" cols="30" rows="5" class="form-control"></textarea>
+                                <label>Email</label>
+                                <input type="text" name="email" class="form-control" required>
 
                                 {{-- checking validation errors for above field here  --}}
                                 @if($errors->any())
                                 <span class="small text-danger">
-                                    {{ $errors->first('route') }}
+                                    {{ $errors->first('email') }}
                                 </span>
                                 @endif
                             </div>
 
-                            {{-- description of driver html field  --}}
+                            {{-- Password of driver html field  --}}
                             <div class="form-group col-md-6">
-                                <label>Description</label>
-                                <textarea name="description" id="" cols="30" rows="5" class="form-control"></textarea>
+                                <label>Password</label>
+                                <input type="text" name="password" class="form-control" required>
 
                                 {{-- checking validation errors for above field here  --}}
                                 @if($errors->any())
                                 <span class="small text-danger">
-                                    {{ $errors->first('description') }}
+                                    {{ $errors->first('password') }}
+                                </span>
+                                @endif
+                            </div>
+
+                        </div>
+
+                        {{-- 3rd row  --}}
+                        <div class="form-row">
+
+                            {{-- license of driver html field  --}}
+                            <div class="form-group col-md-4">
+                                <label>License No.</label>
+                                <input type="text" name="license_no" class="form-control" required>
+
+                                {{-- checking validation errors for above field here  --}}
+                                @if($errors->any())
+                                <span class="small text-danger">
+                                    {{ $errors->first('license_no') }}
+                                </span>
+                                @endif
+                            </div>
+
+                            {{-- experience of driver html field  --}}
+                            <div class="form-group col-md-4">
+                                <label>Experience</label>
+                                <input type="text" name="experience" class="form-control" >
+
+                                {{-- checking validation errors for above field here  --}}
+                                @if($errors->any())
+                                <span class="small text-danger">
+                                    {{ $errors->first('experience') }}
+                                </span>
+                                @endif
+                            </div>
+
+                            {{-- pay of driver html field  --}}
+                            <div class="form-group col-md-4">
+                                <label>Pay</label>
+                                <input type="text" name="pay" class="form-control" required>
+
+                                {{-- checking validation errors for above field here  --}}
+                                @if($errors->any())
+                                <span class="small text-danger">
+                                    {{ $errors->first('pay') }}
+                                </span>
+                                @endif
+                            </div>
+
+                        </div>
+
+                        {{-- 3rd row  --}}
+                        <div class="form-row">
+                            {{-- address of driver html field  --}}
+                            <div class="form-group col-md-12">
+                                <label>Address</label>
+                                <textarea name="address" class="form-control"></textarea>
+
+                                {{-- checking validation errors for above field here  --}}
+                                @if($errors->any())
+                                <span class="small text-danger">
+                                    {{ $errors->first('pay') }}
                                 </span>
                                 @endif
                             </div>
@@ -115,14 +183,14 @@
                             <div class="form-check ml-2 mb-2">
                               <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="status" checked>
-                                driver Status
+                                Active 
                               </label>
                             </div>
                         </div>
 
                         {{-- saving form data to controller  --}}
                         <button type="submit" class="btn btn-primary">
-                            Submit driver Record
+                            Submit Driver Record
                         </button>
                     </form>
                 </div>

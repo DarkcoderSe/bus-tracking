@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use App\Role;
 use App\User;
 use App\Vehicle; // adding vehicle model to driver controlller.
+use App\DriverInfo;
+use Hash;
+use DB;
+use Toastr;
 
 class DriverController extends Controller
 {
@@ -21,26 +25,26 @@ class DriverController extends Controller
     
     // shows the creating a driver page.
 	public function create(){
-		$drivers = User::whereRoleIs('driver')->get(); // getting only list of drivers.
+		$vehicles = Vehicle::where('status', 1)->get(); // get the active vehicle list.;
 		return view('admin.driver.create')->with([
-			'drivers' => $drivers // sending the of drivers to create driver view.
+			'vehicles' => $vehicles
 		]);
     }
 
     // shows the edit page of driver.
     public function edit($id){
-		$drivers = User::whereRoleIs('driver')->get(); // getting all drivers list to send to view.
-		$driver = driver::find($id); // getting the speific driver to edit
+		$vehicles = Vehicle::where('status', 1)->get(); // get the active vehicle list.;
+		$driver = User::find($id); // getting the speific driver to edit
 		return view('admin.driver.edit')->with([
 			'driver' => $driver, // sending driver record to edit view.
-			'drivers' => $drivers
+			'vehicles' => $vehicles
 		]);
     }
 
     // shows the deleting method of driver.
     public function delete($id){
 		try {
-			driver::destroy($id); // checks the if driver is deletable or not.
+			User::destroy($id); // checks the if driver is deletable or not.
 		} catch (\Throwable $th) {
             abort(404); // if argu is wrong then 404 page.
 		}
@@ -52,25 +56,55 @@ class DriverController extends Controller
     
     // submitting record to Database.
 	public function submit(Request $request){
+		// dd($request->all());
 		// added some validation for form values. 
 		$request->validate([
-			'registration_no' => 'required|string',
-			'driver_id' => 'required|integer',
-			'seats' => 'required|integer',
-			'route' => 'required|string',
-			'description' => 'required|nullable',
+			'name' => 'required|string',
+			'email' => 'required|string',
+			'password' => 'required|string',
+			'contact_no' => 'required|string',
+			'license_no' => 'required|string',
+			'experience' => 'nullable|numeric',
+			'pay' => 'required|numeric',
+			'address' => 'required|string'
 		]);
-		// dd($request->all()); // debugging method die dump.
-		$driver = new driver;
-		$driver->registration_no = $request->registration_no;
-		$driver->driver_id = $request->driver_id;
-		$driver->seats = $request->seats;
-		$driver->route = $request->route;
-		$driver->status = $request->status == 'on' ? 1 : 0; // checking if checkbox is checked or not. we are saving 0 and 1 bcz column is in boolean.
-		$driver->description = $request->description;
-		$driver->save();
-		Toastr::success('driver added successfully', 'Success');
 		
+		DB::beginTransaction(); // starting transaction for runtime db error.
+		// if one query executed and other gives error then both will be roll backed. 
+		try {
+			// dd($request->all()); // debugging method die dump.
+			$driver = new User;
+			$driver->name = $request->name;
+			$driver->email = $request->email;
+			$driver->password = Hash::make($request->password);
+			$driver->contact_no = $request->contact_no;
+			$driver->address = $request->address;
+			$driver->save();
+
+			$driverInfo = new DriverInfo;
+			$driverInfo->status = $request->status == 'on' ? 1 : 0; // checking if checkbox is checked or not. we are saving 0 and 1 bcz column is in boolean.
+			$driverInfo->driver_id = $driver->id;
+			$driverInfo->license_no = $request->license_no;
+			$driverInfo->experience = $request->experience;
+			$driverInfo->pay = $request->pay;
+			$driverInfo->save();
+
+			if($request->vehicle_id){
+				$vehicle = Vehicle::findOrFail($request->vehicle_id);
+				$vehicle->driver_id = $driver->id;
+				$vehicle->save();
+			}
+
+			$driver->attachRole('driver');
+		} catch (\Throwable $th) {
+			// dd($th);
+			DB::rollback();
+			Toastr::error('Server side error');
+			return redirect()->back();
+		}
+
+		DB::commit();
+		Toastr::success('driver added successfully', 'Success');
         return redirect()->back();
 	}
     
@@ -78,28 +112,47 @@ class DriverController extends Controller
     public function update(Request $request){
 		// added some validation for form values. 
 		$request->validate([
-			'registration_no' => 'required|string',
-			'driver_id' => 'required|integer',
-			'seats' => 'required|integer',
-			'route' => 'required|string',
-			'description' => 'required|nullable',
+			'name' => 'required|string',
+			'email' => 'required|string',
+			'contact_no' => 'required|string',
+			'license_no' => 'required|string',
+			'experience' => 'nullable|numeric',
+			'pay' => 'required|numeric'
 		]);
-		// dd($request->all()); // debugging method die dump.
+		DB::beginTransaction(); // starting transaction for runtime db error.
+		// if one query executed and other gives error then both will be roll backed. 
 		try {
-			// find that specific driver we send the id from view.
-			$driver = driver::findOrFail($request->id);
-			$driver->registration_no = $request->registration_no;
-			$driver->driver_id = $request->driver_id;
-			$driver->seats = $request->seats;
-			$driver->route = $request->route;
-			$driver->status = $request->status == 'on' ? 1 : 0; // checking if checkbox is checked or not. we are saving 0 and 1 bcz column is in boolean.
-			$driver->description = $request->description;
+			// dd($request->all()); // debugging method die dump.
+			$driver = User::findOrFail($request->id);
+			$driver->name = $request->name;
+			$driver->email = $request->email;
+			$driver->contact_no = $request->contact_no;
+			$driver->address = $request->address;
 			$driver->save();
+
+			$driverInfo = $driver->DriverInfo;
+			$driverInfo->status = $request->status == 'on' ? 1 : 0; // checking if checkbox is checked or not. we are saving 0 and 1 bcz column is in boolean.
+			$driverInfo->driver_id = $driver->id;
+			$driverInfo->license_no = $request->license_no;
+			$driverInfo->experience = $request->experience;
+			$driverInfo->pay = $request->pay;
+			$driverInfo->save();
+
+			if($request->vehicle_id){
+				$vehicle = Vehicle::findOrFail($request->vehicle_id);
+				$vehicle->driver_id = $driver->id;
+				$vehicle->save();
+			}
+
 		} catch (\Throwable $th) {
-			//throw $th;
-			Toastr::error('500: Server side error', 'Error');
+			// dd($th);
+			DB::rollback();
+			Toastr::error('Server side error');
+			return redirect()->back();
 		}
-		Toastr::success('driver added successfully', 'Success');
-		return redirect()->back();
+
+		DB::commit();
+		Toastr::success('driver updated successfully', 'Success');
+        return redirect()->back();
 	}
 }

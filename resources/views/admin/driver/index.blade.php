@@ -59,11 +59,13 @@
                                     {{ $driver->contact_no }}
                                 </td>
                                 <td>
+                                    @if($driver->Vehicle)
                                     {{-- fetching the relationship record with driver  --}}
                                     {{ $driver->Vehicle->registration_no }} <br>
                                     <span class="small text-secondary">
                                         {{ $driver->Vehicle->route }}
                                     </span>
+                                    @endif
                                 </td>
                                 {{-- fetcing addtional driver info from driver info table  --}}
                                 <td>{{ $driver->DriverInfo ? ($driver->DriverInfo->status == 1 ? 'Active' : 'Not Active') : '' }} </td>

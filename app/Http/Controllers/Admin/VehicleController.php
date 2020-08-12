@@ -60,7 +60,7 @@ class VehicleController extends Controller
 			'driver_id' => 'required|integer',
 			'seats' => 'required|integer',
 			'route' => 'required|string',
-			'description' => 'required|nullable',
+			'description' => 'nullable',
 		]);
 		// dd($request->all()); // debugging method die dump.
 		$vehicle = new Vehicle;
@@ -84,7 +84,7 @@ class VehicleController extends Controller
 			'driver_id' => 'required|integer',
 			'seats' => 'required|integer',
 			'route' => 'required|string',
-			'description' => 'required|nullable',
+			'description' => 'nullable',
 		]);
 		// dd($request->all()); // debugging method die dump.
 		try {
