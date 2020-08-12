@@ -38,4 +38,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // creating driver relation with driver info table.
+    public function DriverInfo(){
+        return $this->hasOne(DriverInfo::class, 'driver_id');
+    }
+
+    //creating driver relation with vehicle.
+    public function Vehicle(){
+        return $this->hasOne(Vehicle::class, 'driver_id');
+    }
 }

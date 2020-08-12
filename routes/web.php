@@ -54,4 +54,16 @@ Route::prefix('admin')->namespace('Admin')->middleware('role:admin')->group(func
         Route::post('submit', 'VehicleController@submit');
         Route::post('update', 'VehicleController@update');
     });
+
+    // Driver section 
+    // see naming conventation below i.e: create for creating a Driver.
+    Route::prefix('driver')->group(function(){
+        Route::get('/', 'DriverController@index');
+        Route::get('create', 'DriverController@create');
+        Route::get('edit/{id}', 'DriverController@edit');
+        Route::get('delete/{id}', 'DriverController@delete');
+
+        Route::post('submit', 'DriverController@submit');
+        Route::post('update', 'DriverController@update');
+    });
 });
