@@ -46,6 +46,9 @@ class VehicleController extends Controller
 		} catch (\Throwable $th) {
             abort(404); // if argu is wrong then 404 page.
 		}
+
+		// Toastr is notification package we are using for project.
+		Toastr::success('Vehicle record deleted successfully', 'Success');
 		return redirect()->back(); // redirecting back to list page.
 	}
     
