@@ -90,7 +90,7 @@
                                 {{-- checking validation errors for above field here  --}}
                                 @if($errors->any())
                                 <span class="small text-danger">
-                                    {{ $errors->first('seats') }}
+                                    {{ $errors->first('route') }}
                                 </span>
                                 @endif
                             </div>
@@ -103,9 +103,20 @@
                                 {{-- checking validation errors for above field here  --}}
                                 @if($errors->any())
                                 <span class="small text-danger">
-                                    {{ $errors->first('seats') }}
+                                    {{ $errors->first('description') }}
                                 </span>
                                 @endif
+                            </div>
+                        </div>
+
+                        {{-- status of vehicle checkbox  --}}
+
+                        <div class="form-row">
+                            <div class="form-check ml-2 mb-2">
+                              <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" name="status" checked>
+                                Vehicle Status
+                              </label>
                             </div>
                         </div>
 

@@ -51,7 +51,7 @@
                             @foreach($vehicles as $vehicle)
                             <tr>
                                 <td>
-                                    <a href="{{ URL::to('/vehicle/edit', $vehicle->id) }} ">
+                                    <a href="{{ URL::to('admin/vehicle/edit', $vehicle->id) }} ">
                                     {{ $vehicle->registration_no }}
                                     </a>
                                     {{-- vehicle edit page button  --}}

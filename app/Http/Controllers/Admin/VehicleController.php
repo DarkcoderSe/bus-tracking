@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Vehicle;
 
+use Toastr;
+
 class VehicleController extends Controller
 {
     // shows the list of all vehicles.
@@ -29,9 +31,11 @@ class VehicleController extends Controller
 
     // shows the edit page of vehicle.
     public function edit($id){
+		$drivers = User::whereRoleIs('driver')->get(); // getting all drivers list to send to view.
 		$vehicle = Vehicle::find($id); // getting the speific vehicle to edit
 		return view('admin.vehicle.edit')->with([
-			'vehicle' => $vehicle // sending vehicle record to edit view.
+			'vehicle' => $vehicle, // sending vehicle record to edit view.
+			'drivers' => $drivers
 		]);
     }
 
@@ -47,12 +51,54 @@ class VehicleController extends Controller
     
     // submitting record to Database.
 	public function submit(Request $request){
-        
+		// added some validation for form values. 
+		$request->validate([
+			'registration_no' => 'required|string',
+			'driver_id' => 'required|integer',
+			'seats' => 'required|integer',
+			'route' => 'required|string',
+			'description' => 'required|nullable',
+		]);
+		// dd($request->all()); // debugging method die dump.
+		$vehicle = new Vehicle;
+		$vehicle->registration_no = $request->registration_no;
+		$vehicle->driver_id = $request->driver_id;
+		$vehicle->seats = $request->seats;
+		$vehicle->route = $request->route;
+		$vehicle->status = $request->status == 'on' ? 1 : 0; // checking if checkbox is checked or not. we are saving 0 and 1 bcz column is in boolean.
+		$vehicle->description = $request->description;
+		$vehicle->save();
+		Toastr::success('Vehicle added successfully', 'Success');
+		
         return redirect()->back();
 	}
     
     // update a specific vehicle in database.
     public function update(Request $request){
+		// added some validation for form values. 
+		$request->validate([
+			'registration_no' => 'required|string',
+			'driver_id' => 'required|integer',
+			'seats' => 'required|integer',
+			'route' => 'required|string',
+			'description' => 'required|nullable',
+		]);
+		// dd($request->all()); // debugging method die dump.
+		try {
+			// find that specific vehicle we send the id from view.
+			$vehicle = Vehicle::findOrFail($request->id);
+			$vehicle->registration_no = $request->registration_no;
+			$vehicle->driver_id = $request->driver_id;
+			$vehicle->seats = $request->seats;
+			$vehicle->route = $request->route;
+			$vehicle->status = $request->status == 'on' ? 1 : 0; // checking if checkbox is checked or not. we are saving 0 and 1 bcz column is in boolean.
+			$vehicle->description = $request->description;
+			$vehicle->save();
+		} catch (\Throwable $th) {
+			//throw $th;
+			Toastr::error('500: Server side error', 'Error');
+		}
+		Toastr::success('Vehicle added successfully', 'Success');
 		return redirect()->back();
 	}
 
