@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 // authentication routes grouped in vendor folder.
 // this is package routing
-Auth::routes();
+Auth::routes(['register' => false]);
 
 
 // showing home page with controller 
