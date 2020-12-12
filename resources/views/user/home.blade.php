@@ -7,6 +7,9 @@
             <div class="card">
                 <div class="card-header">
                     <h4>Transport Information</h4>
+                    <span class="text-muted">
+                        You are registered in this current vehicle.
+                    </span>
                 </div>
 
                 <div class="card-body p-0">

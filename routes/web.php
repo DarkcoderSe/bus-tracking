@@ -67,3 +67,12 @@ Route::prefix('admin')->namespace('Admin')->middleware('role:admin')->group(func
         Route::post('update', 'DriverController@update');
     });
 });
+
+
+Route::prefix('user')->middleware('role:student|teacher')->group(function(){
+    // vehicle section 
+    // see naming conventation below i.e:  a vehicle.
+    Route::prefix('vehicle')->group(function(){
+        Route::get('/', 'VehicleController@index');
+    });
+});

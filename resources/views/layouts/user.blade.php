@@ -109,10 +109,10 @@
 
           {{-- drivers list page  --}}
           <li class="nav-item">
-            <a href="{{ URL::to('/admin/driver') }}" class="nav-link">
+            <a href="{{ URL::to('/user/vehicle') }}" class="nav-link">
          
                 <p>
-                  Drivers
+                  Vehicle & Routes
                 </p>
             </a>
           </li>
