@@ -117,6 +117,15 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="{{ URL::to('/user/challan') }}" class="nav-link">
+         
+                <p>
+                  Fee Challan
+                </p>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -75,4 +75,6 @@ Route::prefix('user')->middleware('role:student|teacher')->group(function(){
     Route::prefix('vehicle')->group(function(){
         Route::get('/', 'VehicleController@index');
     });
+
+    Route::get('challan', 'UserController@getChallan');
 });
