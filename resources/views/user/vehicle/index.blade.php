@@ -1,5 +1,6 @@
 @extends('layouts.user')
 
+@section('pageTitle', 'Vehicles & Routes - BTrack')
 {{-- This page shows the list of vehicles  --}}
 {{-- tihs page's parent is layout > master  --}}
 {{-- we use @ for blade syntax and $ for php  --}}
