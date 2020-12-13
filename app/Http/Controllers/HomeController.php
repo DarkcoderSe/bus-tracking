@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Notification;
 
 class HomeController extends Controller
 {
@@ -29,8 +30,10 @@ class HomeController extends Controller
             return view('driver.home');
         }
         else{
-            
-            return view('user.home');
+            $notifications = Notification::all();
+            return view('user.home')->with([
+                'notifications' => $notifications
+            ]);
         }
     }
 }

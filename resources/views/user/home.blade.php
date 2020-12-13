@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
                     <h4>Transport Information</h4>
@@ -60,6 +60,29 @@
                             </tr>
                         </tbody>
                     </table>
+                    @endif
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-success">
+                <div class="card-header">
+                    <h4>
+                        Notifications & Updates
+                    </h4>
+                    
+                </div>
+
+                <div class="card-body">
+                    @if($notifications->count() > 0)
+                    @foreach($notifications as $not)
+                    <b>{{ $not->title }} </b><br>
+                    {{ $not->message }} <hr>
+                    @endforeach
+                    @else 
+                    <p>
+                        No notifications avialable!
+                    </p>
                     @endif
                 </div>
             </div>
