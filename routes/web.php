@@ -41,6 +41,10 @@ Route::prefix('admin')->namespace('Admin')->middleware('role:admin')->group(func
 
         Route::post('submit', 'UserController@submit');
         Route::post('update', 'UserController@update');
+
+        Route::prefix('payment')->group(function(){
+            Route::post('submit', 'PaymentController@submit');
+        });
     });
 
     Route::prefix('notification')->group(function(){
