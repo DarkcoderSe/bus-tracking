@@ -24,13 +24,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $notifications = Notification::all();
+
         if(auth()->user()->hasRole('admin'))
             return view('home');
         else if(auth()->user()->hasRole('driver')){
-            return view('driver.home');
+            return view('driver.home')->with([
+                'notifications' => $notifications
+            ]);
         }
         else{
-            $notifications = Notification::all();
             return view('user.home')->with([
                 'notifications' => $notifications
             ]);

@@ -78,3 +78,18 @@ Route::prefix('user')->middleware('role:student|teacher')->group(function(){
 
     Route::get('challan', 'UserController@getChallan');
 });
+
+
+Route::prefix('driver')->middleware('role:driver')->group(function(){
+    // vehicle section 
+    // see naming conventation below i.e:  a vehicle.
+    Route::prefix('expense')->group(function(){
+        Route::get('/', 'ExpenseController@index');
+        Route::get('create', 'ExpenseController@create');
+        Route::get('edit/{id}', 'ExpenseController@edit');
+        Route::get('delete/{id}', 'ExpenseController@delete');
+
+        Route::post('submit', 'ExpenseController@submit');
+        Route::post('update', 'ExpenseController@update');
+    });
+});
