@@ -132,7 +132,17 @@
             <a href="{{ URL::to('/admin/vehicle') }}" class="nav-link">
          
                 <p>
-                  Vehicle
+                  Vehicles
+                </p>
+            </a>
+          </li>
+          
+           {{-- vehicles list page  --}}
+           <li class="nav-item">
+            <a href="{{ URL::to('/admin/notification') }}" class="nav-link">
+         
+                <p>
+                  Notifications
                 </p>
             </a>
           </li>

@@ -43,6 +43,17 @@ Route::prefix('admin')->namespace('Admin')->middleware('role:admin')->group(func
         Route::post('update', 'UserController@update');
     });
 
+    Route::prefix('notification')->group(function(){
+        Route::get('/', 'NotificationController@index');
+        Route::get('create', 'NotificationController@create');
+        Route::get('edit/{id}', 'NotificationController@edit');
+        Route::get('delete/{id}', 'NotificationController@delete');
+
+        Route::post('submit', 'NotificationController@submit');
+        Route::post('update', 'NotificationController@update');
+    });
+
+
     // vehicle section 
     // see naming conventation below i.e: create for creating a vehicle.
     Route::prefix('vehicle')->group(function(){
