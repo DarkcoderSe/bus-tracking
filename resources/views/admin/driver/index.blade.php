@@ -70,6 +70,7 @@
                                 {{-- fetcing addtional driver info from driver info table  --}}
                                 <td>{{ $driver->DriverInfo ? ($driver->DriverInfo->status == 1 ? 'Active' : 'Not Active') : '' }} </td>
                                 <td>
+                                    
                                     <a href="{{ URL::to('admin/driver/delete', $driver->id) }} " class="btn btn-danger btn-sm">
                                         Delete
                                     </a>

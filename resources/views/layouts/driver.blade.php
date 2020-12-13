@@ -171,5 +171,38 @@
 <script src="{{URL::to('javascripts/demo.js')}}"></script>
 @stack('script')
 {!! Toastr::message() !!}
+
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+            alert('Browser not supported.');
+        }
+    }
+
+    function showPosition(position) {
+        let latitude = position.coords.latitude;
+        let longitude = position.coords.longitude;
+
+        let url = `{{ URL::to('driver/update-location') }}`;
+        let token = `{{ csrf_token() }}`;
+        let data = {
+            _token: token,
+            lat: latitude,
+            lon: longitude
+        } 
+        // console.log([latitude, longitude]);
+        setInterval(function(){
+            $.post(url, data, function(response){
+                console.log(response);
+            });
+
+        }, 30000); // 30 sec
+
+    }
+
+    getLocation();
+</script>
 </body>
 </html>

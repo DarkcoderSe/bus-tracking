@@ -63,6 +63,9 @@
                                 <td>{{ $vehicle->status == 1 ? 'Active' : 'Not Active' }} </td>
                                 <td>{{ $vehicle->Driver->name }} </td>
                                 <td>
+                                    <a href="{{ URL::to('admin/vehicle/location', $vehicle->id) }}" class="btn btn-warning btn-sm">
+                                        Current Location
+                                    </a>
                                     <a href="{{ URL::to('admin/vehicle/delete', $vehicle->id) }} " class="btn btn-danger btn-sm">
                                         Delete
                                     </a>

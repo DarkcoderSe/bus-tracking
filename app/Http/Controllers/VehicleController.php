@@ -13,5 +13,13 @@ class VehicleController extends Controller
 		return view('user.vehicle.index')->with([ 
 			'vehicles' => $vehicles // sending the list to view.
 		]);
-    }
+	}
+	
+	public function location($id){
+		$vehicle = Vehicle::find($id);
+		return view('user.vehicle.location')->with([
+			'vehicle' => $vehicle
+		]);
+	}
+
 }

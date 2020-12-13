@@ -53,6 +53,8 @@ Route::prefix('admin')->namespace('Admin')->middleware('role:admin')->group(func
 
         Route::post('submit', 'VehicleController@submit');
         Route::post('update', 'VehicleController@update');
+
+        Route::get('location/{id}', 'VehicleController@location');
     });
 
     // Driver section 
@@ -74,15 +76,19 @@ Route::prefix('user')->middleware('role:student|teacher')->group(function(){
     // see naming conventation below i.e:  a vehicle.
     Route::prefix('vehicle')->group(function(){
         Route::get('/', 'VehicleController@index');
+        Route::get('location/{id}', 'VehicleController@location');
+
     });
 
     Route::get('challan', 'UserController@getChallan');
+    
 });
-
 
 Route::prefix('driver')->middleware('role:driver')->group(function(){
     // vehicle section 
     // see naming conventation below i.e:  a vehicle.
+    Route::post('update-location', 'HomeController@updateLocation');
+
     Route::prefix('expense')->group(function(){
         Route::get('/', 'ExpenseController@index');
         Route::get('create', 'ExpenseController@create');

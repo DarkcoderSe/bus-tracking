@@ -105,4 +105,11 @@ class VehicleController extends Controller
 		return redirect()->back();
 	}
 
+	public function location($id){
+		$vehicle = Vehicle::find($id);
+		return view('admin.vehicle.location')->with([
+			'vehicle' => $vehicle
+		]);
+	}
+
 }

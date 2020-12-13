@@ -39,4 +39,14 @@ class HomeController extends Controller
             ]);
         }
     }
+
+    public function updateLocation(Request $request){
+        $driver = auth()->user();
+        $vehicle = $driver->Vehicle;
+        $vehicle->latitude = $request->lat;
+        $vehicle->longitude = $request->lon;
+        $vehicle->save();
+
+        return response()->json('updated', 200);
+    }
 }

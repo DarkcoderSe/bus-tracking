@@ -38,7 +38,7 @@
                                 <th>Route</th>
                                 <th>Status</th>
                                 <th>Driver</th>
-                       
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,7 +57,11 @@
                                 <td>{{ $vehicle->route }} </td>
                                 <td>{{ $vehicle->status == 1 ? 'Active' : 'Not Active' }} </td>
                                 <td>{{ $vehicle->Driver->name }} </td>
-                               
+                                <td>
+                                    <a href="{{ URL::to('user/vehicle/location', $vehicle->id) }}" class="btn btn-warning btn-sm">
+                                        Current Location
+                                    </a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

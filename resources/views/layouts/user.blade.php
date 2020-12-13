@@ -174,6 +174,7 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button)
   
+  
 </script>
 <script src="{{URL::to('javascripts/adminlte.js')}}"></script>
 <script src="{{URL::to('javascripts/demo.js')}}"></script>
