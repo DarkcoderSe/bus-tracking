@@ -10,5 +10,9 @@ class Vehicle extends Model
     public function Driver(){
         return $this->belongsTo(User::class, 'driver_id');
     }
+
+    public function Users(){
+        return $this->hasMany(UserVehicle::class, 'vehicle_id');
+    }
     
 }

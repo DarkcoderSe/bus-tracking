@@ -11,4 +11,9 @@ class UserController extends Controller
     public function getChallan(){
         return view('user.challan');
     }
+
+    public function registeredUsers(){
+        $vehicle = auth()->user()->Vehicle;
+        
+    }
 }

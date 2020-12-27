@@ -103,6 +103,7 @@ Route::prefix('driver')->middleware('role:driver')->group(function(){
     // vehicle section 
     // see naming conventation below i.e:  a vehicle.
     Route::post('update-location', 'HomeController@updateLocation');
+    Route::get('users', 'HomeController@registeredUsers');
 
     Route::prefix('expense')->group(function(){
         Route::get('/', 'ExpenseController@index');
