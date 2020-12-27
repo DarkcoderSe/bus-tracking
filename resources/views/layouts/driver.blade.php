@@ -49,9 +49,9 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ URL::to('/home') }} " class="nav-link">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      {{-- <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ URL::to('/profile') }} " class="nav-link">Profile</a>
-      </li>
+      </li> --}}
       <!-- <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ URL::to('/#contact') }} " class="nav-link">test</a>
       </li> -->
@@ -118,6 +118,17 @@
           </li>
 
 
+          {{-- drivers list page  --}}
+          <li class="nav-item">
+            <a href="{{ URL::to('/driver/attendence') }}" class="nav-link">
+         
+                <p>
+                  Attendence
+                </p>
+            </a>
+          </li>
+
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -160,6 +171,8 @@
 <script src="{{URL::to('javascripts/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{URL::to('javascripts/jquery-ui.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

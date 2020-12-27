@@ -114,4 +114,12 @@ Route::prefix('driver')->middleware('role:driver')->group(function(){
         Route::post('submit', 'ExpenseController@submit');
         Route::post('update', 'ExpenseController@update');
     });
+
+    Route::prefix('attendence')->group(function(){
+        Route::get('/', 'AttendenceController@index');
+        Route::get('create', 'AttendenceController@create');
+
+        Route::post('submit', 'AttendenceController@submit');
+        Route::post('update', 'AttendenceController@update');
+    });
 });

@@ -84,10 +84,20 @@ class UserController extends Controller
 
 			$user->attachRole($request->role);
 
-			$userVehicle = new UserVehicle;
-			$userVehicle->user_id = $user->id;
-			$userVehicle->vehicle_id = $request->vehicle_id;
-			$userVehicle->save();
+			$vehicle = Vehicle::find($request->vehicle_id);
+			$userVehicles = UserVehicle::where('vehicle_id', $request->vehicle_id)->get();
+
+			if($vehicle->seats >= $userVehicles->count()){
+
+				$userVehicle = new UserVehicle;
+				$userVehicle->user_id = $user->id;
+				$userVehicle->vehicle_id = $request->vehicle_id;
+				$userVehicle->save();
+			}
+			else{
+				Toastr::error('Maxmimum Limit exceed for this vehicle');
+				return redirect()->back();
+			}
 
 
 		} catch (\Throwable $th) {

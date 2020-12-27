@@ -51,9 +51,9 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ URL::to('/home') }} " class="nav-link">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      {{-- <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ URL::to('/profile') }} " class="nav-link">Profile</a>
-      </li>
+      </li> --}}
       <!-- <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ URL::to('/#contact') }} " class="nav-link">test</a>
       </li> -->
