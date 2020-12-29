@@ -8,12 +8,13 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="{{asset('css/app.css')}}">
 
         <!-- Styles -->
         <style>
             html, body {
                 background-color: #fff;
-                color: #636b6f;
+                color: #fff;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -28,6 +29,9 @@
                 align-items: center;
                 display: flex;
                 justify-content: center;
+                background: url('https://locallylahore.com/wp-content/uploads/eu14.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
             }
 
             .position-ref {
@@ -49,7 +53,7 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: #fff;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
@@ -64,28 +68,45 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+        <nav class="navbar navbar-expand-sm navbar-dark text-light" style="background-color: #273154;">
+            <a class="navbar-brand" href="#">
+                <img src="https://cms.comsats.edu.pk:8092/Content/img/logo_with_text.png" style="width: 200px;" alt="">
 
+            </a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation"></button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0 justify-content-end">
+                    
+                    @auth
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url('/home') }}">Home</a>
+                    </li>
+                    @else
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('login') }}">Login</a>
+                    </li>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                        </li>
                         @endif
                     @endauth
-                </div>
-            @endif
 
+                </ul>
+               
+            </div>
+        </nav>
+        <div class="flex-center position-ref full-height">
+      
             <div class="content">
                 <div class="title m-b-md">
                     CUI Transport
                 </div>
-
               
             </div>
         </div>
+
+        @include('footer')
     </body>
 </html>

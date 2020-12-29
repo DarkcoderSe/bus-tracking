@@ -80,7 +80,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #273154;">
     <!-- Brand Logo -->
     <!-- Sidebar -->
     <div class="sidebar">
@@ -165,11 +165,21 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2019 </strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      {{-- <b>Version</b> 1.0 | Developed by <a href="http://darkcoderse.com">Kashif Saleem</a> --}}
-    </div>
+    <div class="row">
+      <div class="col-md-4">
+          &copy; CUI Transport 2020. <br>
+          <b>About us!</b> <br>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+          Accusamus, magni? Veritatis eaque optio, culpa voluptatem laudantium fugiat 
+          voluptate ab quidem natus perspiciatis accusantium nam 
+          provident id sit fuga veniam eligendi?
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4 text-right">
+          <b>Contact: </b>+92 123 456789 <br>
+          <b>Email: </b>info@app.com 
+      </div>
+  </div>
   </footer>
 
 </div>
