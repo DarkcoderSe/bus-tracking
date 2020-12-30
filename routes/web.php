@@ -29,7 +29,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // creating admin routes with security 
 // middleware used for security only admin can access this group of routes.
-Route::prefix('admin')->namespace('Admin')->middleware('role:admin')->group(function(){
+Route::prefix('admin')->namespace('Admin')->middleware(['auth','role:admin'])->group(function(){
 
     // user section 
     // see naming conventation below i.e: create for creating a user.
@@ -86,7 +86,7 @@ Route::prefix('admin')->namespace('Admin')->middleware('role:admin')->group(func
 });
 
 
-Route::prefix('user')->middleware('role:student|teacher')->group(function(){
+Route::prefix('user')->middleware(['auth', 'role:student|teacher'])->group(function(){
     // vehicle section 
     // see naming conventation below i.e:  a vehicle.
     Route::prefix('vehicle')->group(function(){
@@ -99,7 +99,7 @@ Route::prefix('user')->middleware('role:student|teacher')->group(function(){
     
 });
 
-Route::prefix('driver')->middleware('role:driver')->group(function(){
+Route::prefix('driver')->middleware(['auth','role:driver'])->group(function(){
     // vehicle section 
     // see naming conventation below i.e:  a vehicle.
     Route::post('update-location', 'HomeController@updateLocation');

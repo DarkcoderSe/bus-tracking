@@ -47,7 +47,7 @@ class DriverController extends Controller
 		try {
 			
 			DriverInfo::where('driver_id', $id)->delete();
-			Expense::where('user_id', $id)->delete();
+			Expense::where('driver_id', $id)->delete();
 			Vehicle::where('driver_id', $id)->delete();
 			User::destroy($id); // checks the if driver is deletable or not.
 
