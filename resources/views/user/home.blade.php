@@ -40,7 +40,7 @@
                             <tr>
                                 <th>Status</th>
                                 <td>
-                                    @if($user->UserVehicle->Vehicle->status)
+                                    @if($user->UserVehicle && $user->UserVehicle->Vehicle->status)
                                     <span class="text-success">
                                         Active
                                     </span>
