@@ -16,7 +16,8 @@ class CreateVehiclesTable extends Migration
         // This is the table for vehicles. we store all info about buses, cars etc...
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id(); // primary key of this table.
-            $table->foreignId('driver_id')->constrained('users'); // creating foreign of driver to this vehicle.
+            // $table->foreignId('driver_id')->constrained('users'); // creating foreign of driver to this vehicle.
+            $table->unsignedBigInteger('driver_id');
             $table->string('registration_no'); // vehicle registration plate no.
             $table->bigInteger('seats'); // how many students can register for this vehicle.
             $table->text('description')->nullable(); // any additional info will be stored here.

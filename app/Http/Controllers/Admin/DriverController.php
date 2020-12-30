@@ -9,6 +9,7 @@ use App\Role;
 use App\User;
 use App\Vehicle; // adding vehicle model to driver controlller.
 use App\DriverInfo;
+use App\Expense;
 use Hash;
 use DB;
 use Toastr;
@@ -44,9 +45,17 @@ class DriverController extends Controller
     // shows the deleting method of driver.
     public function delete($id){
 		try {
+			
+			DriverInfo::where('driver_id', $id)->delete();
+			Expense::where('user_id', $id)->delete();
+			Vehicle::where('driver_id', $id)->delete();
 			User::destroy($id); // checks the if driver is deletable or not.
+
 		} catch (\Throwable $th) {
-            abort(404); // if argu is wrong then 404 page.
+			// throw $th;
+			Toastr::error('This record is linked with vehicle. Please delete vehicle record first!');
+			return redirect()->back();
+            // abort(404); // if argu is wrong then 404 page.
 		}
 
 		// Toastr is notification package we are using for project.
@@ -88,12 +97,6 @@ class DriverController extends Controller
 			$driverInfo->experience = $request->experience;
 			$driverInfo->pay = $request->pay;
 			$driverInfo->save();
-
-			if($request->vehicle_id){
-				$vehicle = Vehicle::findOrFail($request->vehicle_id);
-				$vehicle->driver_id = $driver->id;
-				$vehicle->save();
-			}
 
 			$driver->attachRole('driver');
 		} catch (\Throwable $th) {

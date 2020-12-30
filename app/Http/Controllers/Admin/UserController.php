@@ -8,7 +8,7 @@ use App\Role;
 use App\User;
 use App\Vehicle;
 use App\UserVehicle;
-
+use App\Payment;
 use DB;
 use Hash;
 
@@ -44,9 +44,16 @@ class UserController extends Controller
     // shows the deleting method of user.
     public function delete($id){
 		try {
+			UserVehicle::where('user_id', $id)->delete();
+			Payment::where('user_id', $id)->delete();
 			User::destroy($id); // checks the if user is deletable or not.
 		} catch (\Throwable $th) {
-            abort(404); // if argu is wrong then 404 page.
+			throw $th;
+			// abort(404); // if argu is wrong then 404 page.
+			
+			// Toastr is notification package we are using for project.
+			Toastr::error('This user record is linked with other tables. please delete linked record first', 'Error');
+			return redirect()->back(); // redirecting back to list page.
 		}
 
 		// Toastr is notification package we are using for project.

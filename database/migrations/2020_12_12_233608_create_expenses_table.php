@@ -20,7 +20,8 @@ class CreateExpensesTable extends Migration
             $table->bigInteger('amount')->default(0);
             
             $table->unsignedBigInteger('driver_id');
-            $table->foreign('driver_id')->references('id')->on('users');
+            // $table->foreign('driver_id')->references('id')->on('users');
+            // $table->unsignedBigInteger
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ class CreatePaymentsTable extends Migration
             $table->string('title')->nullable();
             $table->string('challan_image')->nullable();
             $table->integer('status')->default(0);
-            $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

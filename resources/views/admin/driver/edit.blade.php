@@ -61,32 +61,7 @@
                                 @endif
                             </div>
 
-                            {{-- vehicle of driver html field  --}}
-                            <div class="form-group col-md-4">
-                                <label>Vehicle</label>
-                                <select name="vehicle_id"  class="custom-select">
-                                    <option value="{{ $driver->Vehicle ? $driver->Vehicle->id : '' }}">
-                                        {{ $driver->Vehicle ? $driver->Vehicle->registration_no : '' }}
-                                    </option>
-                                    @foreach($vehicles as $vehicle)
-                                    <option value="{{ $vehicle->id }}">
-                                        {{ $vehicle->registration_no }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                                {{-- checking validation errors for above field here  --}}
-                                @if($errors->any())
-                                <span class="small text-danger">
-                                    {{ $errors->first('vehicle_id') }}
-                                </span>
-                                @endif
-
-                                @if($vehicles->count() <= 0)
-                                <span class="small text-secondary">
-                                    Please add some <a href="{{ URL::to('/admin/vehicle') }} ">vehicles</a> first.
-                                </span>
-                                @endif
-                            </div>
+                          
 
                         </div>
 

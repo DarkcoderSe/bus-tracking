@@ -16,7 +16,8 @@ class CreateDriverInfosTable extends Migration
         // aditional info of driver will be stored here. 
         Schema::create('driver_infos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('driver_id')->constrained('users'); // foreign key with driver.
+            // $table->foreignId('driver_id')->constrained('users'); // foreign key with driver.
+            $table->unsignedBigInteger('driver_id');
             $table->string('license_no'); // driver license no will be stored here.
             $table->integer('experience')->default(0); // how many years of driver's experience will be stored here.
             $table->boolean('status')->default(0); /// status of driver is he active or not.

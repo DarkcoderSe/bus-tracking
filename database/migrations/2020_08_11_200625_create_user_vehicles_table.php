@@ -16,8 +16,10 @@ class CreateUserVehiclesTable extends Migration
         // Registered students to specific vehicle.
         Schema::create('user_vehicles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained(); // foreign key to users i.e: students, teachers
-            $table->foreignId('vehicle_id')->constrained(); // foreign key to vehicle.
+            // $table->foreignId('user_id')->constrained(); // foreign key to users i.e: students, teachers
+            // $table->foreignId('vehicle_id')->constrained(); // foreign key to vehicle.
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('vehicle_id');
          
             $table->timestamps(); // registration date.
         });

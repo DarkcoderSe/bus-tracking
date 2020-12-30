@@ -75,7 +75,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #273154;">
     <!-- Brand Logo -->
     <!-- Sidebar -->
     <div class="sidebar">
