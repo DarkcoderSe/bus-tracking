@@ -44,6 +44,7 @@ class VehicleController extends Controller
 		try {
 			Vehicle::destroy($id); // checks the if vehicle is deletable or not.
 		} catch (\Throwable $th) {
+			throw $th;
             abort(404); // if argu is wrong then 404 page.
 		}
 
