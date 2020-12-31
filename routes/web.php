@@ -82,6 +82,8 @@ Route::prefix('admin')->namespace('Admin')->middleware(['auth','role:admin'])->g
 
         Route::post('submit', 'DriverController@submit');
         Route::post('update', 'DriverController@update');
+
+        Route::get('expense/{id}', 'DriverController@expense');
     });
 });
 

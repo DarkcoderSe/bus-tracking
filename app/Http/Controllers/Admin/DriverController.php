@@ -40,7 +40,14 @@ class DriverController extends Controller
 			'driver' => $driver, // sending driver record to edit view.
 			'vehicles' => $vehicles
 		]);
-    }
+	}
+	
+	public function expense($id){
+		$user = User::find($id);
+		return view('admin.driver.expense')->with([
+			'user' => $user
+		]);
+	}
 
     // shows the deleting method of driver.
     public function delete($id){
